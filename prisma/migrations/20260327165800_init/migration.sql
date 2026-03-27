@@ -1,0 +1,19 @@
+-- CreateTable
+CREATE TABLE "Task" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "completed" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "ActivityLog" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "taskId" INTEGER NOT NULL,
+    "action" TEXT NOT NULL,
+    "timestamp" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "notes" TEXT,
+    CONSTRAINT "ActivityLog_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "Task" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
